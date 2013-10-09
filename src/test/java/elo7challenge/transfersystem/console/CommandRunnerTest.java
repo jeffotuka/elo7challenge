@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import elo7challenge.transfersystem.domain.FinancialTransfer;
-import elo7challenge.transfersystem.service.TransferManager;
+import elo7challenge.transfersystem.transfer.TransferManager;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandRunnerTest {
@@ -28,7 +28,7 @@ public class CommandRunnerTest {
 	@Test
 	public void shouldDisplayAllTransfersWhenCommandIsList() {
 		List<FinancialTransfer> transfers = new ArrayList<FinancialTransfer>();
-		when(manager.listAllTransfers()).thenReturn(transfers);
+		when(manager.getAllTransfers()).thenReturn(transfers);
 
 		runner.run(ArgsCommand.LIST);
 		
