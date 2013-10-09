@@ -1,4 +1,4 @@
-package elo7challenge.transfersystem.main;
+package elo7challenge.transfersystem.console;
 
 public class ArgsInterpreter {
 

@@ -1,10 +1,13 @@
-package elo7challenge.transfersystem.main;
+package elo7challenge.transfersystem.console;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import elo7challenge.transfersystem.console.ArgsCommand;
+import elo7challenge.transfersystem.console.ArgsInterpreter;
 
 public class ArgsInterpreterTest {
 
