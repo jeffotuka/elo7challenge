@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class FinancialTransfer {
 
+	private Long id;
 	private String senderAccount;
 	private String recipientAccount;
 	private BigDecimal value;
@@ -13,6 +14,12 @@ public class FinancialTransfer {
 	private FinancialTransferType type;
 	
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getSenderAccount() {
 		return senderAccount;
 	}
