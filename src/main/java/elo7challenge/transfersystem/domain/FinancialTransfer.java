@@ -13,6 +13,14 @@ public class FinancialTransfer {
 	private Date scheduledDate;
 	private FinancialTransferType type;
 	
+	public String getTypeName() {
+		if (this.type != null) {
+			return this.type.name();
+		} else {
+			return null;
+		}
+	}
+	
 	
 	public Long getId() {
 		return id;
