@@ -2,6 +2,6 @@ package elo7challenge.transfersystem.console;
 
 public enum ArgsCommand {
 
-	LIST;
+	LIST, SETUP;
 	
 }

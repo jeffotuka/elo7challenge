@@ -10,6 +10,8 @@ public class ArgsInterpreter {
 		ArgsCommand command = null;
 		if ("--list".equals(args[0])) {
 			command = ArgsCommand.LIST;
+		} else if ("--setup".equals(args[0])) {
+			command = ArgsCommand.SETUP;
 		}
 		
 		return command;

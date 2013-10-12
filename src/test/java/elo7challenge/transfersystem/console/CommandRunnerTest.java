@@ -4,6 +4,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import elo7challenge.transfersystem.db.DBTransferSetup;
 import elo7challenge.transfersystem.domain.FinancialTransfer;
 import elo7challenge.transfersystem.transfer.TransferManager;
 
@@ -24,6 +26,7 @@ public class CommandRunnerTest {
 	
 	private @Mock TransferManager manager;
 	private @Mock TransferDisplay display;
+	private @Mock DBTransferSetup setup;
 	
 	@Test
 	public void shouldDisplayAllTransfersWhenCommandIsList() {
@@ -42,5 +45,12 @@ public class CommandRunnerTest {
 		
 		verifyZeroInteractions(manager);
 		verifyZeroInteractions(display);
+	}
+	
+	@Test
+	public void shouldSetupDatabaseWhenCommandIsSetup() throws SQLException {
+		runner.run(ArgsCommand.SETUP);
+		
+		verify(setup).execute();
 	}
 }

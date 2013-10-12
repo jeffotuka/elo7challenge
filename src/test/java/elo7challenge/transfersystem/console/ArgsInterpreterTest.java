@@ -49,5 +49,14 @@ public class ArgsInterpreterTest {
 		
 		assertNull(command);
 	}
-	
+
+	@Test
+	public void shouldIdentifySetupCommandFromArgs() {
+		String[] args = new String[] {"--setup"};
+		
+		ArgsCommand command = this.interpreter.identifyCommand(args);
+
+		assertEquals(ArgsCommand.SETUP, command);
+	}
+
 }
