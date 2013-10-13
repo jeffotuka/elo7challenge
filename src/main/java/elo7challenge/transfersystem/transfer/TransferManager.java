@@ -17,4 +17,8 @@ public class TransferManager {
 		return transferDao.list();
 	}
 	
+	public void saveTransfer(FinancialTransfer transfer) {
+		transferDao.save(transfer);
+	}
+	
 }
