@@ -68,7 +68,40 @@ public class TransferConverterTest {
 		
 		assertFalse(converter.tryConvertToTransfer(readTransfer));
 	}
-	
+
+	@Test
+	public void shouldDetectNoErrorsWhenConversionDataIsValid() {
+		Map<String, String> readTransfer = this.buildDefaultReadTransfer();
+		
+		assertEquals(0, converter.detectConvertToTransferErrors(readTransfer).size());
+	}
+
+	@Test
+	public void shouldDetectErrorWhenConversionDataIsInvalid() {
+		Map<String, String> readTransfer = this.buildDefaultReadTransfer();
+		readTransfer.put("scheduledDate", "abcd-ef-gh");
+		
+		Map<String, String> errors = converter.detectConvertToTransferErrors(readTransfer);
+		
+		assertEquals(1, errors.size());
+		assertEquals("abcd-ef-gh", errors.get("scheduledDate"));
+	}
+
+	@Test
+	public void shouldDetectMultipleErrorsWhenConversionDataIsInvalid() {
+		Map<String, String> readTransfer = this.buildDefaultReadTransfer();
+		readTransfer.put("value", "dinheiro");
+		readTransfer.put("scheduledDate", "abcd-ef-gh");
+		readTransfer.put("type", "ZZ");
+		
+		Map<String, String> errors = converter.detectConvertToTransferErrors(readTransfer);
+		
+		assertEquals(3, errors.size());
+		assertEquals("dinheiro", errors.get("value"));
+		assertEquals("abcd-ef-gh", errors.get("scheduledDate"));
+		assertEquals("ZZ", errors.get("type"));
+	}
+
 	private Map<String, String> buildDefaultReadTransfer() {
 		Map<String, String> readTransfer = new HashMap<String, String>();
 		readTransfer.put("senderAccount", "01212-3");
