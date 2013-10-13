@@ -59,4 +59,13 @@ public class ArgsInterpreterTest {
 		assertEquals(ArgsCommand.SETUP, command);
 	}
 
+	@Test
+	public void shouldIdentifyInputCommandFromArgs() {
+		String[] args = new String[] {"--input"};
+		
+		ArgsCommand command = this.interpreter.identifyCommand(args);
+
+		assertEquals(ArgsCommand.INPUT, command);
+	}
+
 }

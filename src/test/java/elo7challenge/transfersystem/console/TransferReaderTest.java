@@ -1,6 +1,7 @@
 package elo7challenge.transfersystem.console;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.StringReader;
 import java.util.Map;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class TransferReaderTest {
 
@@ -19,15 +21,24 @@ public class TransferReaderTest {
 				+ "\n21/07/2020"
 				+ "\nB";
 		BufferedReader bufferedReader = new BufferedReader(new StringReader(inputStr));
-		
-		TransferReader transferReader = new TransferReader();
-		Map<String, String> readTransfer = transferReader.readTransfer(bufferedReader);
+		TransferReader transferReader = new TransferReader(bufferedReader);
+		Map<String, String> readTransfer = transferReader.readTransfer();
 		
 		assertEquals("01212-3", readTransfer.get("senderAccount"));
 		assertEquals("45454-6", readTransfer.get("recipientAccount"));
 		assertEquals("120.99", readTransfer.get("value"));
 		assertEquals("21/07/2020", readTransfer.get("scheduledDate"));
 		assertEquals("B", readTransfer.get("type"));
+	}
+
+	@Test(expected=RuntimeException.class)
+	public void shouldThrowExceptionWhenFailingToRead() throws IOException {
+		BufferedReader bufferedReader = Mockito.mock(BufferedReader.class);
+		TransferReader transferReader = new TransferReader(bufferedReader);
+		
+		when(bufferedReader.readLine()).thenThrow(new IOException());
+		
+		transferReader.readTransfer();
 	}
 
 }

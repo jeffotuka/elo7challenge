@@ -1,6 +1,7 @@
 package elo7challenge.transfersystem.console;
 
 import java.util.List;
+import java.util.Map;
 
 import elo7challenge.transfersystem.db.DBTransferSetup;
 import elo7challenge.transfersystem.domain.FinancialTransfer;
@@ -10,11 +11,16 @@ public class CommandRunner {
 
 	private TransferManager manager;
 	private TransferDisplay display;
+	private TransferReader reader;
+	private TransferConverter converter;
 	private DBTransferSetup setup;
 
-	public CommandRunner(TransferManager manager, TransferDisplay display, DBTransferSetup setup) {
+	public CommandRunner(TransferManager manager, TransferDisplay display, 
+			TransferReader reader, TransferConverter converter, DBTransferSetup setup) {
 		this.manager = manager;
 		this.display = display;
+		this.reader = reader;
+		this.converter = converter;
 		this.setup = setup;
 	}
 	
@@ -25,6 +31,11 @@ public class CommandRunner {
 			
 		} else if (ArgsCommand.SETUP.equals(command)) {
 			this.setup.execute();
+			
+		} else if (ArgsCommand.INPUT.equals(command)) {
+			Map<String, String> readTransfer = reader.readTransfer();
+			FinancialTransfer transfer = converter.convertToTransfer(readTransfer);
+			this.manager.saveTransfer(transfer);
 		}
 	}
 

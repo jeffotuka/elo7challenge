@@ -19,7 +19,7 @@ public class TransferSystem {
 			ArgsCommand command = argsInterpreter.identifyCommand(args);
 
 			connection = DriverManager.getConnection("jdbc:hsqldb:file:db/dbtransfer", "SA", "");
-			CommandRunner commandRunner = new CommandRunnerFactory().build(connection, System.out);
+			CommandRunner commandRunner = new CommandRunnerFactory().build(connection, System.in, System.out);
 			commandRunner.run(command);
 			
 		} catch (SQLException e) {

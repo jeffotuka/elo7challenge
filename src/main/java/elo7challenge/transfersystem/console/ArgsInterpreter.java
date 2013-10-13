@@ -12,6 +12,8 @@ public class ArgsInterpreter {
 			command = ArgsCommand.LIST;
 		} else if ("--setup".equals(args[0])) {
 			command = ArgsCommand.SETUP;
+		} else if ("--input".equals(args[0])) {
+			command = ArgsCommand.INPUT;
 		}
 		
 		return command;

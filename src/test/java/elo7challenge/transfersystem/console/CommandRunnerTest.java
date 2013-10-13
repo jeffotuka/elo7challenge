@@ -4,9 +4,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +29,8 @@ public class CommandRunnerTest {
 	
 	private @Mock TransferManager manager;
 	private @Mock TransferDisplay display;
+	private @Mock TransferReader reader;
+	private @Mock TransferConverter converter;
 	private @Mock DBTransferSetup setup;
 	
 	@Test
@@ -53,4 +58,18 @@ public class CommandRunnerTest {
 		
 		verify(setup).execute();
 	}
+	
+	@Test
+	public void shouldSaveTransferFromInputWhenCommandIsInput() throws SQLException, IOException {
+		FinancialTransfer transfer = new FinancialTransfer();
+		
+		Map<String, String> readTransfer = new HashMap<String, String>();
+		when(reader.readTransfer()).thenReturn(readTransfer);
+		when(converter.convertToTransfer(readTransfer)).thenReturn(transfer);
+		
+		runner.run(ArgsCommand.INPUT);
+		
+		verify(manager).saveTransfer(transfer);
+	}
+
 }
