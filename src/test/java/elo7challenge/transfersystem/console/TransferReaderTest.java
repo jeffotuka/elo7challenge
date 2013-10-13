@@ -1,6 +1,7 @@
 package elo7challenge.transfersystem.console;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
@@ -20,8 +21,10 @@ public class TransferReaderTest {
 				+ "\n120.99"
 				+ "\n21/07/2020"
 				+ "\nB";
+
 		BufferedReader bufferedReader = new BufferedReader(new StringReader(inputStr));
-		TransferReader transferReader = new TransferReader(bufferedReader);
+		TransferDisplay display = Mockito.mock(TransferDisplay.class);
+		TransferReader transferReader = new TransferReader(bufferedReader, display);
 		Map<String, String> readTransfer = transferReader.readTransfer();
 		
 		assertEquals("01212-3", readTransfer.get("senderAccount"));
@@ -29,12 +32,19 @@ public class TransferReaderTest {
 		assertEquals("120.99", readTransfer.get("value"));
 		assertEquals("21/07/2020", readTransfer.get("scheduledDate"));
 		assertEquals("B", readTransfer.get("type"));
+		
+		verify(display).print("Sender account: ");
+		verify(display).print("Recipient account: ");
+		verify(display).print("Value: ");
+		verify(display).print("Scheduled date: ");
+		verify(display).print("Type: ");
 	}
 
 	@Test(expected=RuntimeException.class)
 	public void shouldThrowExceptionWhenFailingToRead() throws IOException {
 		BufferedReader bufferedReader = Mockito.mock(BufferedReader.class);
-		TransferReader transferReader = new TransferReader(bufferedReader);
+		TransferDisplay display = Mockito.mock(TransferDisplay.class);
+		TransferReader transferReader = new TransferReader(bufferedReader, display);
 		
 		when(bufferedReader.readLine()).thenThrow(new IOException());
 		

@@ -28,5 +28,10 @@ public class TransferDisplay {
 		}
 		printWriter.flush();
 	}
+
+	public void print(String string) {
+		printWriter.print(string);
+		printWriter.flush();
+	}
 	
 }

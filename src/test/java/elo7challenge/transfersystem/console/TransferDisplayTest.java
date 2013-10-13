@@ -91,8 +91,6 @@ public class TransferDisplayTest {
 		List<FinancialTransfer> transfers = Arrays.asList(transfer1, transfer2, transfer3);
 		display.printAllTransfers(transfers);
 
-		System.out.println(outputStream.toString());
-		
 		BufferedReader reader = new BufferedReader(new StringReader(outputStream.toString()));
 		reader.readLine();
 		assertEquals("id 5, sender 01212-3, recipient 45454-6, value 120.99, tax 15.67, date 21/07/2020, type B", reader.readLine());
@@ -100,4 +98,13 @@ public class TransferDisplayTest {
 		assertEquals("id 7, sender 78787-9, recipient 60840-2, value 0.01, tax null, date 29/02/2020, type null", reader.readLine());
 	}
 
+	@Test
+	public void shouldPrintAString() {
+		String string = "this is a string";
+		
+		display.print(string);
+		
+		assertEquals(string, outputStream.toString());
+	}
+	
 }

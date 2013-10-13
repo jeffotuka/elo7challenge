@@ -20,8 +20,8 @@ public class CommandRunnerFactory {
 
 		PrintWriter printWriter = new PrintWriter(out);
 		TransferDisplay display = new TransferDisplay(printWriter);
-
-		TransferReader reader = new TransferReader(new BufferedReader(new InputStreamReader(in)));
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+		TransferReader reader = new TransferReader(bufferedReader, display);
 		
 		TransferConverter converter = new TransferConverter();
 		
