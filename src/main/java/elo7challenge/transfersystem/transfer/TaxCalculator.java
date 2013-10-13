@@ -1,5 +1,10 @@
 package elo7challenge.transfersystem.transfer;
 
-public interface TaxCalculator {
+import java.math.BigDecimal;
+import java.util.Date;
 
+public interface TaxCalculator {
+	
+	BigDecimal calculate(BigDecimal value, Date scheduledDate);
+	
 }
