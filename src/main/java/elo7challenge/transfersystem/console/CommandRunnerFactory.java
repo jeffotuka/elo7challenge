@@ -10,13 +10,14 @@ import java.sql.Connection;
 import elo7challenge.transfersystem.dao.FinancialTransferDAO;
 import elo7challenge.transfersystem.dao.sql.FinancialTransferSQLDAO;
 import elo7challenge.transfersystem.db.DBTransferSetup;
+import elo7challenge.transfersystem.transfer.TaxCalculatorFactory;
 import elo7challenge.transfersystem.transfer.TransferManager;
 
 public class CommandRunnerFactory {
 
 	public CommandRunner build(Connection connection, InputStream in, OutputStream out) {
 		FinancialTransferDAO transferDao = new FinancialTransferSQLDAO(connection);
-		TransferManager manager = new TransferManager(transferDao);
+		TransferManager manager = new TransferManager(transferDao, new TaxCalculatorFactory());
 
 		PrintWriter printWriter = new PrintWriter(out);
 		TransferDisplay display = new TransferDisplay(printWriter);
