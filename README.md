@@ -1,6 +1,6 @@
 ## elo7challenge
 
-A experimental Java application that saves and queries records, as part of a programming challenge. 
+An experimental Java application that saves and queries records, as part of a programming challenge. 
 
 The current implementation is console-based and has few dependencies - only HSQLDB is required for basic execution. It is intended to be used as a core for more elaborate implementations.
 
@@ -64,4 +64,4 @@ Running "input" command to interactively register a new record:
 java -cp "bin:lib/*" elo7challenge.transfersystem.main.TransferSystem --input
 ```
 
-Alternatively, the project is configured for Eclipse, it can be used to compile and run the application.
+If you prefer, the project is configured for Eclipse, it can be used to compile and run the application.
