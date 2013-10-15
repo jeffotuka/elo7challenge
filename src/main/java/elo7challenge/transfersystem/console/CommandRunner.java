@@ -41,6 +41,9 @@ public class CommandRunner {
 			} else {
 				this.display.printErrorMessages(converterResult.getErrors());
 			}
+			
+		} else {
+			this.display.printHelp();
 		}
 	}
 

@@ -1,6 +1,7 @@
 package elo7challenge.transfersystem.console;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -139,4 +140,11 @@ public class TransferDisplayTest {
 		assertEquals("type" + ": " + "invalid value [ZZ]", reader.readLine());
 	}
 
+	@Test
+	public void shouldPrintHelp() {
+		display.printHelp();
+
+		assertTrue(outputStream.toString().length() > 0);
+	}
+	
 }

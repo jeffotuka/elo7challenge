@@ -1,7 +1,6 @@
 package elo7challenge.transfersystem.console;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -42,15 +41,6 @@ public class CommandRunnerTest {
 		
 		verify(display).printAllTransfers(transfers);
 	}
-
-
-	@Test
-	public void shouldDoNothingWhenCommandIsNull() {
-		runner.run(null);
-		
-		verifyZeroInteractions(manager);
-		verifyZeroInteractions(display);
-	}
 	
 	@Test
 	public void shouldSetupDatabaseWhenCommandIsSetup() throws SQLException {
@@ -88,6 +78,13 @@ public class CommandRunnerTest {
 		runner.run(ArgsCommand.INPUT);
 		
 		verify(display).printErrorMessages(errors);
+	}
+
+	@Test
+	public void shouldPrintHelpWhenCommandIsUnknown() throws SQLException, IOException {
+		runner.run(null);
+		
+		verify(display).printHelp();
 	}
 
 }

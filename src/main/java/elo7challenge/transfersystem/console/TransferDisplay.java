@@ -42,5 +42,15 @@ public class TransferDisplay {
 		printWriter.print(string);
 		printWriter.flush();
 	}
+
+	public void printHelp() {
+		printWriter.println("Usage: TransferSystem [command]");
+		printWriter.println();
+		printWriter.println("where command is:");
+		printWriter.println("    --setup     First time setup");
+		printWriter.println("    --list      Lists all scheduled transfers");
+		printWriter.println("    --input     Input transfer values and schedule it");
+		printWriter.flush();
+	}
 	
 }

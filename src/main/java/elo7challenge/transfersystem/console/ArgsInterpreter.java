@@ -7,7 +7,7 @@ public class ArgsInterpreter {
 			return null;
 		}
 
-		ArgsCommand command = null;
+		ArgsCommand command = ArgsCommand.HELP;
 		if ("--list".equals(args[0])) {
 			command = ArgsCommand.LIST;
 		} else if ("--setup".equals(args[0])) {

@@ -42,15 +42,6 @@ public class ArgsInterpreterTest {
 	}
 
 	@Test
-	public void shouldIdentifyNothingWhenUnknownArgs() {
-		String[] unknownArgs = new String[] {"XYZ"};
-
-		ArgsCommand command = this.interpreter.identifyCommand(unknownArgs);
-		
-		assertNull(command);
-	}
-
-	@Test
 	public void shouldIdentifySetupCommandFromArgs() {
 		String[] args = new String[] {"--setup"};
 		
@@ -68,4 +59,13 @@ public class ArgsInterpreterTest {
 		assertEquals(ArgsCommand.INPUT, command);
 	}
 
+	@Test
+	public void shouldIdentifyHelpCommandFromUnknownArgs() {
+		String[] args = new String[] {"--abcdefghij"};
+		
+		ArgsCommand command = this.interpreter.identifyCommand(args);
+
+		assertEquals(ArgsCommand.HELP, command);
+	}
+	
 }
