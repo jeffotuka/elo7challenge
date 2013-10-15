@@ -31,7 +31,11 @@ public class TransferDisplay {
 	}
 
 	public void printErrorMessages(List<ErrorMessage> errors) {
-		
+		for (ErrorMessage error : errors) {
+			printWriter.printf("\n%s: %s", error.getField(), error.getMessage());
+		}
+		printWriter.println();
+		printWriter.flush();
 	}
 	
 	public void print(String string) {

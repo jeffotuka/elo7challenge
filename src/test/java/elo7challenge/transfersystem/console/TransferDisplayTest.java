@@ -107,4 +107,36 @@ public class TransferDisplayTest {
 		assertEquals(string, outputStream.toString());
 	}
 	
+	@Test
+	public void shouldPrintAnErrorMessage() throws IOException {
+		List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+		errors.add(new ErrorMessage("value", "invalid value [xpto]"));
+		
+		display.printErrorMessages(errors);
+		
+		BufferedReader reader = new BufferedReader(new StringReader(outputStream.toString()));
+		reader.readLine();
+		assertEquals("value" + ": " + "invalid value [xpto]", reader.readLine());
+	}
+
+	@Test
+	public void shouldPrintMultipleErrorMessages() throws IOException {
+		List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+		errors.add(new ErrorMessage("senderAccount", "invalid value []"));
+		errors.add(new ErrorMessage("recipientAccount", "invalid value []"));
+		errors.add(new ErrorMessage("value", "invalid value [xpto]"));
+		errors.add(new ErrorMessage("scheduledDate", "invalid value [1234-56-78]"));
+		errors.add(new ErrorMessage("type", "invalid value [ZZ]"));
+
+		display.printErrorMessages(errors);
+		
+		BufferedReader reader = new BufferedReader(new StringReader(outputStream.toString()));
+		reader.readLine();
+		assertEquals("senderAccount" + ": " + "invalid value []", reader.readLine());
+		assertEquals("recipientAccount" + ": " + "invalid value []", reader.readLine());
+		assertEquals("value" + ": " + "invalid value [xpto]", reader.readLine());
+		assertEquals("scheduledDate" + ": " + "invalid value [1234-56-78]", reader.readLine());
+		assertEquals("type" + ": " + "invalid value [ZZ]", reader.readLine());
+	}
+
 }
