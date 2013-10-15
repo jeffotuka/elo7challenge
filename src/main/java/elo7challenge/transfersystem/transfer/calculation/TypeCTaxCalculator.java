@@ -17,7 +17,7 @@ public class TypeCTaxCalculator implements TaxCalculator {
 	
 	@Override
 	public BigDecimal calculate(BigDecimal value, Date scheduledDate) {
-		if (scheduledDate == null || scheduledDate.before(clock.getCurrentDate())) {
+		if (value == null || scheduledDate == null || scheduledDate.before(clock.getCurrentDate())) {
 			return null;
 		}
 		

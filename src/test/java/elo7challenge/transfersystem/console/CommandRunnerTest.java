@@ -78,7 +78,7 @@ public class CommandRunnerTest {
 	public void shouldPrintErrorsWhenCommandIsInputAndInputIsInvalid() throws SQLException, IOException {
 		Map<String, String> readTransfer = new HashMap<String, String>();
 		List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
-		errors.add(new ErrorMessage());
+		errors.add(new ErrorMessage("value", "invalid value [xpto]"));
 		TransferConverterResult converterResult = new TransferConverterResult();
 		converterResult.setErrors(errors);;
 

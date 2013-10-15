@@ -30,7 +30,7 @@ public class TransferConverterResultTest {
 	public void cannotIndicateSuccessWhenHasErrors() {
 		TransferConverterResult result = new TransferConverterResult();
 		List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
-		errors.add(new ErrorMessage());
+		errors.add(new ErrorMessage("value", "invalid value [xpto]"));
 		result.setErrors(errors);
 		
 		assertFalse(result.isSuccess());
