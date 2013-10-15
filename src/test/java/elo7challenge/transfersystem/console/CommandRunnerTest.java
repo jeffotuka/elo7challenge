@@ -61,15 +61,33 @@ public class CommandRunnerTest {
 	
 	@Test
 	public void shouldSaveTransferFromInputWhenCommandIsInput() throws SQLException, IOException {
-		FinancialTransfer transfer = new FinancialTransfer();
-		
 		Map<String, String> readTransfer = new HashMap<String, String>();
+		FinancialTransfer transfer = new FinancialTransfer();
+		TransferConverterResult converterResult = new TransferConverterResult();
+		converterResult.setConverted(transfer);
+		
 		when(reader.readTransfer()).thenReturn(readTransfer);
-		when(converter.convertToTransfer(readTransfer)).thenReturn(transfer);
+		when(converter.convertToTransfer(readTransfer)).thenReturn(converterResult);
 		
 		runner.run(ArgsCommand.INPUT);
 		
 		verify(manager).saveTransfer(transfer);
+	}
+
+	@Test
+	public void shouldPrintErrorsWhenCommandIsInputAndInputIsInvalid() throws SQLException, IOException {
+		Map<String, String> readTransfer = new HashMap<String, String>();
+		List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+		errors.add(new ErrorMessage());
+		TransferConverterResult converterResult = new TransferConverterResult();
+		converterResult.setErrors(errors);;
+
+		when(reader.readTransfer()).thenReturn(readTransfer);
+		when(converter.convertToTransfer(readTransfer)).thenReturn(converterResult);
+
+		runner.run(ArgsCommand.INPUT);
+		
+		verify(display).printErrorMessages(errors);
 	}
 
 }

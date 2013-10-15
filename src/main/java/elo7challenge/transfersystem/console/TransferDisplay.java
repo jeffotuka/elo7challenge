@@ -29,6 +29,10 @@ public class TransferDisplay {
 		printWriter.flush();
 	}
 
+	public void printErrorMessages(List<ErrorMessage> errors) {
+		
+	}
+	
 	public void print(String string) {
 		printWriter.print(string);
 		printWriter.flush();

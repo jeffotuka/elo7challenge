@@ -34,8 +34,13 @@ public class CommandRunner {
 			
 		} else if (ArgsCommand.INPUT.equals(command)) {
 			Map<String, String> readTransfer = reader.readTransfer();
-			FinancialTransfer transfer = converter.convertToTransfer(readTransfer);
-			this.manager.saveTransfer(transfer);
+			TransferConverterResult converterResult = converter.convertToTransfer(readTransfer);
+			if (converterResult.isSuccess()) {
+				FinancialTransfer transfer = converterResult.getConverted();
+				this.manager.saveTransfer(transfer);
+			} else {
+				this.display.printErrorMessages(converterResult.getErrors());
+			}
 		}
 	}
 
