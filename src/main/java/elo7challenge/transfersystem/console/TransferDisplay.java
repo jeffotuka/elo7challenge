@@ -26,6 +26,7 @@ public class TransferDisplay {
 					transfer.getScheduledDate(),
 					transfer.getTypeName());
 		}
+		printWriter.println();
 		printWriter.flush();
 	}
 

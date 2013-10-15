@@ -33,11 +33,11 @@ public class TransferReaderTest {
 		assertEquals("21/07/2020", readTransfer.get("scheduledDate"));
 		assertEquals("B", readTransfer.get("type"));
 		
-		verify(display).print("Sender account: ");
-		verify(display).print("Recipient account: ");
-		verify(display).print("Value: ");
-		verify(display).print("Scheduled date: ");
-		verify(display).print("Type: ");
+		verify(display).print("Sender account = ");
+		verify(display).print("Recipient account = ");
+		verify(display).print("Value = ");
+		verify(display).print("Scheduled date = ");
+		verify(display).print("Type = ");
 	}
 
 	@Test(expected=RuntimeException.class)

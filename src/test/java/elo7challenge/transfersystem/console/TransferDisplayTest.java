@@ -48,7 +48,7 @@ public class TransferDisplayTest {
 		List<FinancialTransfer> transfers = Arrays.asList(transfer);
 		display.printAllTransfers(transfers);
 		
-		assertEquals("\nid 5, sender 01212-3, recipient 45454-6, value 120.99, tax 15.67, date 21/07/2020, type B", outputStream.toString());
+		assertEquals("\nid 5, sender 01212-3, recipient 45454-6, value 120.99, tax 15.67, date 21/07/2020, type B\n", outputStream.toString());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class TransferDisplayTest {
 		List<FinancialTransfer> transfers = new ArrayList<FinancialTransfer>();
 		display.printAllTransfers(transfers);
 		
-		assertEquals("", outputStream.toString());
+		assertEquals("\n", outputStream.toString());
 	}
 
 	@Test

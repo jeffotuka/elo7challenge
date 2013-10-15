@@ -19,19 +19,19 @@ public class TransferReader {
 		try {
 			Map<String, String> readTransfer = new HashMap<String, String>();
 			
-			display.print("Sender account: ");
+			display.print("Sender account = ");
 			readTransfer.put("senderAccount", reader.readLine());
 			
-			display.print("Recipient account: ");
+			display.print("Recipient account = ");
 			readTransfer.put("recipientAccount", reader.readLine());
 			
-			display.print("Value: ");
+			display.print("Value = ");
 			readTransfer.put("value", reader.readLine());
 
-			display.print("Scheduled date: ");
+			display.print("Scheduled date = ");
 			readTransfer.put("scheduledDate", reader.readLine());
 			
-			display.print("Type: ");
+			display.print("Type = ");
 			readTransfer.put("type", reader.readLine());
 			
 			return readTransfer;
